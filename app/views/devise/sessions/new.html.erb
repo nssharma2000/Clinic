@@ -9,6 +9,7 @@
     <div id="main_container" class="container text-center h-screen">
       <div id="container" class="container text-center h-full bg-sky-100">
       <% if !user_signed_in? %>
+      <%= render "devise/shared/error_messages", resource: resource %>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <br>
         <h1 class="text-4xl text-black font-medium">Login</h1>
@@ -24,7 +25,7 @@
           <%= f.password_field :password, autocomplete: "current-password", class: "w-3/6 text-lg ms-3 bg-gray-100 outline-none shadow-inner rounded-lg p-2" %>
           <br>
           <%= button_to "Sign in", new_user_session_path, class: "w-1/5 text-center block mt-10 mx-auto rounded-lg p-2 w-1/5 text-lg bg-blue-500 text-white hover:cursor-pointer" %> 
-      <% end %>
+          <% end %>
       <% else %>
       <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "w-1/5 text-center block mt-10 mx-auto rounded-lg p-2 w-1/5 text-lg bg-blue-500 text-white hover:cursor-pointer" %>
       <% end %>
