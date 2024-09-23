@@ -82,4 +82,4 @@ production:
   database: Clinic
   username: nssha
   password: nama1234
-  DATABASE_URL: "postgresql://nssha:iSCFsVmWo3LvvvrQp7YfQfAJiskLEgmE@dpg-crome2l6l47c73fps1cg-a.oregon-postgres.render.com/clinic_mftg"
+  DATABASE_URL: "postgresql://nssha:iSCFsVmWo3LvvvrQp7YfQfAJiskLEgmE@dpg-crome2l6l47c73fps1cg-a/clinic_mftg"
