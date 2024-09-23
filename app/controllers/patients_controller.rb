@@ -1,5 +1,9 @@
 class PatientsController < ApplicationController 
 
+  def index
+    @pt = Patient.new
+  end
+
   def new 
     @pt = Patient.new
     current_user.role = :admin
@@ -7,7 +11,7 @@ class PatientsController < ApplicationController
   end
 
   def show
-    @pt = Patient.find(params[:id])   
+    @pt = Patient.find(params[:id])  
     redirect_to "/"
   end
   
@@ -35,7 +39,7 @@ class PatientsController < ApplicationController
     
     @pt = Patient.find(params[:id])
     @pt.destroy
-    redirect_to patients_url
+    redirect_to "/"
   end
 
   def pt_params
