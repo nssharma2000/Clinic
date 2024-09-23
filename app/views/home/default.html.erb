@@ -1,0 +1,96 @@
+<html>
+  <head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div id="main_container" class="container text-center h-screen">
+      <div id="container" class="container text-center h-full bg-sky-100">
+        <% if user_signed_in? %>
+        <% if current_user.dor == false %>
+        <br>
+        <br>
+          <div class="bg-white mx-auto p-10 text-center w-3/5 rounded-lg shadow-inner">
+          <p class="mx-auto text-xl font-medium">Welcome, <%= current_user.email %>. You are a receptionist.</p>
+          <br>
+            <table class="mx-auto table-auto border border-slate-500 border-collapse" caption="Patients">
+              <thead>
+                <tr>
+                  <th class="border p-3 border-slate-500">Patient ID</th>
+                  <th class="border p-3 border-slate-500">Name</th>
+                  <th class="border p-3 border-slate-500">Condition</th>
+                  <th class="border p-3 border-slate-500">Doctor</th>
+                  <th class="border p-3 border-slate-500">Edit</th>
+                  <th class="border p-3 border-slate-500">Delete</th>
+                </tr>
+              </thead>
+              <tbody class="p-3">
+              <% for p in @all_patients %>
+              <tr>
+                <td class="p-3 border border-slate-500">
+                <%= p.id %>
+                </td>
+                <td class="p-3 border border-slate-500">
+                <%= p.name %>
+                </td>
+                <td class="p-3 border border-slate-500">
+                <%= p.condition %>
+                </td>
+                <td class="p-3 border border-slate-500">
+                <%= p.doctor %>
+                </td>
+                <td class="p-3 border border-slate-500">
+                <%= link_to 'Edit', edit_patient_path(p), class: "bg-blue-500 text-white text-lg rounded-lg p-2 hover:cursor-pointer" %>
+                </td>
+                <td class="p-3 border border-slate-500">
+                <%= link_to 'Delete', patient_path(p), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "bg-blue-500 text-white text-lg rounded-lg p-2 hover:cursor-pointer" %>
+                </td>
+              </tr>
+              <% end %>
+              </tbody>
+            </table>
+            <br>
+            <a href="new_patient" class="bg-blue-500 text-white text-lg rounded-lg p-2 hover:cursor-pointer">
+            Register new patients
+            </a>
+          </div>
+        <br>
+        <%= button_to "Sign out", destroy_user_session_path, method: :delete , class: "text-center mx-auto rounded-lg p-2 text-lg bg-red-500 text-white hover:cursor-pointer" %>
+        <% else %>
+        <br>
+        <br>
+        <br>
+        <div class="bg-white mx-auto p-10 text-center w-3/5 rounded-lg shadow-inner">
+          <p class="mx-auto font-medium text-2xl">Welcome, <%= current_user.email %>. You're a doctor. </p>
+          <br>
+          <%= line_chart Patient.group_by_day(:created_at).count %>
+        </div>
+        <br>
+        <br>
+        <%= button_to "Sign out", destroy_user_session_path, method: :delete , class: "text-center mx-auto rounded-lg p-2 text-lg bg-red-500 text-white hover:cursor-pointer" %>
+        <% end %>
+        <br>
+        <% else %>
+        <br>
+        <br>
+        <div class="text-center text-2xl p-5 my-5 mx-auto mt-20 h-1/5 w-2/6 bg-white rounded-lg shadow-inner">
+          <p class="text-center mt-5">
+          Please sign in to continue.
+          </p>
+        </div>
+        <a href="users/sign_in" id="login_button" class="w-1/5 text-center mx-auto rounded-lg p-2 w-1/5 text-lg bg-blue-500 text-white hover:cursor-pointer">Login</a>
+        
+    
+        
+        <% end %> 
+
+
+
+
+
+
+
+
+
