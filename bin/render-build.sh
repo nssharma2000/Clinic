@@ -2,6 +2,10 @@
 # exit on error
 set -o errexit
 
+rm -rf vendor/bundle .bundle .gems
+bundle config set --local deployment 'true'
+bundle config set --local without 'development test'
+bundle config set force_ruby_platform true
 bundle install
 bundle exec rails assets:precompile
 bundle exec rails assets:clean
@@ -10,4 +14,4 @@ bundle exec rails assets:clean
 # perform database migrations in the build command.
 # Uncomment the following line:
 
-# bundle exec rails db:migrate
+bundle exec rails db:migrate
