@@ -58,4 +58,4 @@ end
 
 gem "chartkick", "~> 5.1"
 
-gem "groupdate", "~> 6.4"
+gem "groupdate", "~> 6.5"
